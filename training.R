@@ -40,4 +40,17 @@ sudanColours <- colorRampPalette(colors = baseColours, space = "Lab")
 
 plot(sudan01, col = sudanColours(n = 18))
 
+### Plot state map and add label of states on map
+plot(sudan01, col = sudanColours(n = 18))
+text(x = coordinates(sudan01), labels = sudan01$State_En, cex = 0.5)
+
+### Plot a red dot on Norht Kourfodan
+plot(sudan01, col = sudanColours(n = 18))
+points(coordinates(subset(sudan01, State_En == "North Kordofan")), pch = 19, col = "red", cex = 1)
+text(x = coordinates(sudan01), labels = sudan01$State_En, cex = 0.5)
+
+### 
+
+### Plot villages on map
+
 
