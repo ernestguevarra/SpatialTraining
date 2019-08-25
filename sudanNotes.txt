@@ -1,0 +1,26 @@
+A shapefile is a digital vector storage format for storing geometric location and associated attribute information. This format lacks the capacity to store topological information. The shapefile format was introduced with ArcView GIS version 2 in the early 1990s. It is now possible to read and write shapefiles using a variety of free and paid programs.
+Shapefiles are simple because they store the primitive geometric data types of points, lines, and polygons. They are of limited use without any attributes to specify what they represent. Therefore, a table of records will store properties/attributes for each primitive shape in the shapefile. Shapes (points/lines/polygons) together with data attributes can create infinitely many representations about geographic data. Representation provides the ability for powerful and accurate computations.
+While the term "shapefile" is quite common, a "shapefile" is actually a set of several files. Three individual files are mandatory to store the core data that comprise a shapefile: .shp, .shx, and .dbf. The actual shapefile relates specifically to .shp files but alone is incomplete for distribution, as the other supporting files are required.
+There are further optional files which store primarily index data to improve performance. Each individual file should conform to the DOS 8.3 filename convention (8 character filename prefix, period, 3 character filename suffix such as "shp") in order to be compatible with past applications that handle shapefiles, though many recent software applications accept files with longer names. For this same reason, all files should be located in the same folder.
+
+
+
+When looking at a map, latitude lines run horizontally. Latitude lines are also known as parallels since they are parallel and are an equal distant from each other. Each degree of latitude is approximately 69 miles (111 km) apart; there is a variation due to the fact that the earth is not a perfect sphere but an oblate ellipsoid (slightly egg-shaped). To remember latitude, imagine them as the horizontal rungs of a ladder ("ladder-tude"). Degrees latitude are numbered from 0° to 90° north and south. Zero degrees is the equator, the imaginary line which divides our planet into the northern and southern hemispheres. 90° north is the North Pole and 90° south is the South Pole.
+
+The vertical longitude lines are also known as meridians. They converge at the poles and are widest at the equator (about 69 miles or 111 km apart). Zero degrees longitude is located at Greenwich, England (0°). The degrees continue 180° east and 180° west where they meet and form the International Date Line in the Pacific Ocean. Greenwich, the site of the British Royal Greenwich Observatory, was established as the site of the prime meridian by an international conference in 1884.
+
+
+is a standard for use in cartography, geodesy, and navigation. It comprises a standard coordinate frame for the Earth, a standard spheroidal reference surface (the datum or reference ellipsoid) for raw altitude data, and a gravitational equipotential surface (the geoid) that defines the nominal sea level.
+
+A package that provides classes and methods for spatial data. The classes document where the spatial location information resides, for 2D or 3D data. Utility functions are provided, e.g. for plotting data as maps, spatial selection, as well as methods for retrieving coordinates, for subsetting, print, summary, etc.
+
+
+[1] "SpatialLinesDataFrame"
+attr(,"package")
+[1] "sp"
+
+A polygon consists of one or more rings. A ring is a connected sequence of four or more points that form a closed, non-self-intersecting loop. A polygon may contain multiple outer rings. The order of vertices or orientation for a ring indicates which side of the ring is the interior of the polygon. The neighborhood to the right of an observer walking along the ring in vertex order is the neighborhood inside the polygon. Vertices of rings defining holes in polygons are in a counterclockwise direction. Vertices for a single, ringed polygon are, therefore, always in clockwise order. The rings of a polygon are referred to as its parts.
+
+A PolyLine is an ordered set of vertices that consists of one or more parts. A part is a connected sequence of two or more points. Parts may or may not be connected to one another. Parts may or may not intersect one another.Because this specification does not forbid consecutive points with identical coordinates, shapefile readers must handle such cases. On the other hand, the degenerate, zero length parts that might result are not allowed.
+
+A point consists of a pair of double-precision coordinates in the order X,Y.
