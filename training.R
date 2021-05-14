@@ -10,15 +10,22 @@ sleacDataX <- read.table(file = "westPokotSLEACdata.csv", header = TRUE, sep = "
 ## Practice reading map data - We practice using two functions - readShapeSpatial()
 ## and readOGR() - to read spatial data
 
+install.packages(c("rgeos", "rgdal", "raster"))
+
 library(rgeos)
 library(rgdal)
-library(maptools)
+library(raster)
+#library(sf)
 
-sudan01 <- readShapeSpatial(fn = "sudanMaps/sudan01")
+sudan01 <- readShapeSpatial(fn = "sudanMaps/sudan01")       ## Old approach; not recommended
 
 sudan01 <- readOGR(dsn = "sudanMaps", layer = "sudan01")
 
 sudan02 <- readOGR(dsn = "sudanMaps", layer = "sudan02")
+
+## ESRI Shapefiles
+## Read West Pokot Shapefiles into R as a SpatialPolygonsDataFrame
+westPokot <- readOGR(dsn = "westPokotMaps", layer = "westPokot")
 
 
 ## Manipulation and plotting of spatial objects
