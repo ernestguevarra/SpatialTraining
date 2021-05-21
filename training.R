@@ -27,6 +27,8 @@ sudan02 <- readOGR(dsn = "sudanMaps", layer = "sudan02")
 ## Read West Pokot Shapefiles into R as a SpatialPolygonsDataFrame
 westPokot <- readOGR(dsn = "westPokotMaps", layer = "westPokot")
 
+## View the data structure of an R object
+str(westPokot)
 
 ## Manipulation and plotting of spatial objects
 
