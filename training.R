@@ -30,7 +30,70 @@ westPokot <- readOGR(dsn = "westPokotMaps", layer = "westPokot")
 ## View the data structure of an R object
 str(westPokot)
 
+## View the data.frame component of westPokot
+westPokot@data
+
+## View the SpatialPolygons componet of westPokot
+westPokot@polygons
+
 ## Manipulation and plotting of spatial objects
+
+## Plot westPokot
+plot(westPokot)
+
+## Access and plot the top county layer only
+
+## Check what identifier is there for the polygon of interest
+plot(westPokot)
+text(x = coordinates(westPokot), labels = westPokot$SP_ID)
+text(x = coordinates(westPokot),  labels = westPokot$NAME_4)
+
+## Subset westPokot to only the polygon with SP_ID 1032
+westPokot_1032 <- subset(x = westPokot, subset = SP_ID == 1032)
+str(westPokot_1032)
+plot(westPokot_1032)
+
+## Plot 1032 in the centre with all other county borders still showing
+plot(westPokot_1032, lty = 0)
+plot(westPokot, add = TRUE)
+
+## Plot westPokot with area 1032 with thicker borders and red colour
+plot(westPokot)
+plot(westPokot_1032, border = "red", lwd = 2, add = TRUE)
+
+## Plot westPokot with area 1032 with line width of 5 and blue colour
+plot(westPokot)
+plot(westPokot_1032, border = "blue", lwd = 5, add = TRUE)
+
+## Plot westPokot with area 1032 with line width of 3, border colour red, 
+## and fill colour blue (col)
+plot(westPokot_1032)
+
+## Plot the SLEAC data by colouring the westPokot map based on their coverage
+## results (choropleth map)
+
+## First step: Calculate pt coverage for each sub-county
+sam_pt_coverage <- sleacData$sam.in / sleacData$sam.total
+sam_pt_coverage <- with(sleacData, sam.in / sam.total)
+
+## Second step: Match the coverage values to the westPokot map
+
+plot(westPokot)
+text(x = coordinates(westPokot), labels = westPokot$SP_ID)
+## We know already that 1032 matches with North Pokot
+## 1037 = Central Pokot
+## 1036 = West Pokot
+## 1043 = South Pokot
+
+westPokot@data$sub_county <- c("Central Pokot", "West Pokot", 
+                               "South Pokot", "North Pokot")
+westPokot@data$sub_county <- ifelse(westPokot@data$SP_ID == "1037", "Central Pokot",
+                               ifelse(westPokot@data$SP_ID == "1036", "West Pokot",
+                                 ifelse(westPokot@data$SP_ID == "1043", "South Pokot", "North Pokot")))
+
+
+
+
 
 ### Plot sudan01
 plot(sudan01)
