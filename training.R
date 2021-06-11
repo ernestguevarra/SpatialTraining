@@ -76,22 +76,31 @@ plot(westPokot_1032)
 sam_pt_coverage <- sleacData$sam.in / sleacData$sam.total
 sam_pt_coverage <- with(sleacData, sam.in / sam.total)
 
+sam_pd_coverage <- 
+sam_pd_coverage <- 
+
+## How do I add the calculated coverage values to the sleacData object?
+sleacData$sam_pt_coverage <- 
+sleacData$sam_pd_coverage <- 
+  
 ## Second step: Match the coverage values to the westPokot map
 
 plot(westPokot)
 text(x = coordinates(westPokot), labels = westPokot$SP_ID)
 ## We know already that 1032 matches with North Pokot
-## 1037 = Central Pokot
-## 1036 = West Pokot
+## 1037 = West Pokot
+## 1036 = Central Pokot
 ## 1043 = South Pokot
 
-westPokot@data$sub_county <- c("Central Pokot", "West Pokot", 
+westPokot@data$sub_county <- c("West Pokot", "Central Pokot", 
                                "South Pokot", "North Pokot")
-westPokot@data$sub_county <- ifelse(westPokot@data$SP_ID == "1037", "Central Pokot",
-                               ifelse(westPokot@data$SP_ID == "1036", "West Pokot",
+westPokot@data$sub_county <- ifelse(westPokot@data$SP_ID == "1037", "West Pokot",
+                               ifelse(westPokot@data$SP_ID == "1036", "Central Pokot",
                                  ifelse(westPokot@data$SP_ID == "1043", "South Pokot", "North Pokot")))
 
-
+## merge sleadData with westPokot data
+westPokot@data <- merge(x = westPokot@data, y = sleacData, 
+                        by.x = "sub_county", by.y = "subcounty")
 
 
 
