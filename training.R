@@ -160,7 +160,7 @@ text(coordinates(westPokot), labels = westPokot@data$sub_county)
 
 
 ## Step 5: add a legend
-
+## This step is to learn how to add a map legend
 
 
 
