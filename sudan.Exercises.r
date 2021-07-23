@@ -12,20 +12,17 @@ sudan01 <- cbind(sudan01, coverage = coverage)
 names(sudan01)[ncol(sudan01)] <- "coverage"
 
 ## Create a plot of the coverage values per State
-## view the structure of the data
 
+## view the structure of the data
 str(sudan01)
 
 ## View the Spatial data.frame component of the sudan01 object
-
 sudan01@data
 
 ## View the SpatialPolygons component of sudan01 object
-
 sudan01@polygons
 
 ## Plot sudan01
-
 plot(sudan01)
 
 
