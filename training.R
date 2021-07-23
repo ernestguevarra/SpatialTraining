@@ -79,12 +79,35 @@ sam_pt_coverage <- with(sleacData, sam.in / sam.total)
 mam_pt_coverage <- sleacData$mam.in / sleacData$mam.total
 mam_pt_coverage <- with(sleacData, mam.in /mam.total)
 
+##
+## Because this is a SLEAC survey, we need to classify point and period coverage
+## based on set standards. For this exercise we used two standards classifier
+## of 20% and 50%
+##
+classify_coverage <- function(n, cases_in, std = c(0.2, 0.5)) {
+  d1 <- std[1] * n
+  d2 <- std[2] * n
+  
+  classification <- ifelse(cases_in <= d1, "low",
+    ifelse(cases_in > d2, "high", "moderate"))
+  
+  classification
+}
+
+sam_pt_class <- classify_coverage(n = sleacData$sam.total, 
+                                  cases_in = sleacData$sam.in)
+sam_pd_class <- classify_coverage(n = sleacData$sam.total + sleacData$sam.rec,
+                                  cases_in = sleacData$sam.in + sleacData$sam.rec)
+
+
 sam_pd_coverage <- with(sleacData, (sam.in + sam.rec) / (sam.total + sam.rec))
 mam_pd_coverage <- with(sleacData, (mam.in + mam.rec) / (mam.total + mam.rec))
 
 ## How do I add the calculated coverage values to the sleacData object?
 sleacData$sam_pt_coverage <- sam_pt_coverage
 sleacData$sam_pd_coverage <- sam_pd_coverage
+sleacData$sam_pt_class <- sam_pt_class
+sleacData$sam_pd_class <- sam_pd_class
   
 ## Second step: Match the coverage values to the westPokot map
 
@@ -164,9 +187,37 @@ plot(westPokot,
      border = "gray50", lwd = 3)
 text(coordinates(westPokot), labels = westPokot@data$sub_county)
 
+## Step 5: add a legend
+## This step is to learn how to add a map legend
+legend(
+  title = "Point Coverage",
+  x = "topright", inset = 0.002,
+  legend = c("0%", "> 0 and <= 20%", "> 20% and <= 40", 
+             "> 40% and <= 60%", ">60% and <= 80%", "> 80% and <= 100%"),
+  pch = 22, pt.cex = 2,
+  col = RdYlGn, pt.bg = RdYlGn,
+  bty = "n", cex = 0.75
+)
+
+## Mapping classifications rather than numbers
+RdYlGn <- brewer.pal(n = 3, name = "RdYlGn")
+
+plot(westPokot,
+     col = ifelse(westPokot@data$sam_pt_class == "low", RdYlGn[1],
+             ifelse(westPokot@data$sam_pd_class == "moderate", RdYlGn[2], RdYlGn[3])), 
+     border = "gray50", lwd = 3)
+text(coordinates(westPokot), labels = westPokot@data$sub_county)
 
 ## Step 5: add a legend
 ## This step is to learn how to add a map legend
+legend(
+  title = "Point Coverage Classification",
+  x = "topright", inset = 0.002,
+  legend = c("Low (0-20%)", "Moderate (20%-50%)", "High (50%-100%"),
+  pch = 22, pt.cex = 2,
+  col = RdYlGn, pt.bg = RdYlGn,
+  bty = "n", cex = 0.75
+)
 
 
 
