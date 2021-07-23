@@ -11,6 +11,7 @@ coverage <- c(95, 56, 73, 55, 19, 97, 60, 2, 46, 31, 70, 23, 71, 66, 38, 78, 74,
 sudan01 <- cbind(sudan01, coverage = coverage)
 names(sudan01)[ncol(sudan01)] <- "coverage"
 
+<<<<<<< HEAD
 ## Create a plot of the coverage values per State
 
 ## view the structure of the data
@@ -38,12 +39,21 @@ plot(sudan01)
 
 ### Load library RColorBrewer
 #install.packages("RColorBrewer")
+=======
+sudan01@data
+
+## Create a plot of the coverage values per State
+plot(sudan01)
+
+##choose the colour scheme 
+>>>>>>> d6c3583ef1d8b8dede05906e59aa8400d9814b31
 
 library(RColorBrewer)
 
 ## Get RdYlGn colours using RColorBrewer
 RdYlGn <- brewer.pal(n = 5, name = "RdYlGn")
 
+<<<<<<< HEAD
 ## merge Coverage Data with Sudan map
 
 sudan01 <- merge(x = sudan01, y = coverage, 
@@ -93,5 +103,8 @@ legend(
   col = RdYlGn, pt.bg = RdYlGn,
   bty = "n", cex = 0.75
 )
+=======
+
+>>>>>>> d6c3583ef1d8b8dede05906e59aa8400d9814b31
 
 
