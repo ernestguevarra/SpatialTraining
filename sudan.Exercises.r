@@ -95,7 +95,7 @@ text(coordinates(sudan01), labels = sudan01@data$State_En)
 
 ## Add a map legend to the Vitamin A Coverage classification
 legend(
-  title = "Vitamin Coverage Classification",
+  title = "Vitamin A Coverage Classification",
   x = "topright", inset = 0.002,
   legend = c("Low (0-30%)", "Moderate (30%-70%)", "High (70%-100%"),
   pch = 22, pt.cex = 2,
