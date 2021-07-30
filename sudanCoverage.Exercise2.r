@@ -11,8 +11,9 @@ sudan01 <- readOGR(dsn = "sudanMaps", layer = "sudan01")
 
 ## Combine the coverage values in coverage.csv with sudan01
 
-sudan01 <- cbind(sudan01, coverage.csv = coverage.csv)
-names(sudan01)[ncol(sudan01)] <- "coverage"
+sudan01 <- merge(x = sudan01, y = coverage, 
+                   by.x = "State_En", by.y = "state")
+
 
 ## view the structure of the data
 str(sudan01)
@@ -49,7 +50,7 @@ plot(sudan01)
 library(RColorBrewer)
 
 ## Get RdYlGn colours using RColorBrewer
-RdYlGn <- brewer.pal(n = 5, name = "RdYlGn")
+RdYlGn <- brewer.pal(n = 6, name = "RdYlGn")
 
 ## Classify coverage values using the cut function and command
 coverage_class <- cut(x = sudan01@data$coverage,
@@ -68,12 +69,12 @@ text(coordinates(sudan01), labels = sudan01@data$State_En, cex = 0.8)
 
 legend(
   title = "Coverage Map",
-  x = "topright", inset = 0.002,
+  x = "bottomright", inset = 0.002,
   legend = c("0%", "> 0 and <= 20%", "> 20% and <= 40", 
              "> 40% and <= 60%", ">60% and <= 80%", "> 80% and <= 100%"),
   pch = 22, pt.cex = 2,
   col = RdYlGn, pt.bg = RdYlGn,
-  bty = "n", cex = 0.75
+  bty = "n", cex = 0.7
 )
 
 ## Mapping classifications rather than numbers
@@ -91,14 +92,14 @@ plot(sudan01,
                   ifelse(sudan01@data$coverage_class == "moderate", RdYlGn[2], RdYlGn[3])), 
      border = "gray50", lwd = 3)
 
-text(coordinates(sudan01), labels = sudan01@data$State_En)
+text(coordinates(sudan01), labels = sudan01@data$State_En, cex = 0.8)
 
 ## Add a map legend to the Vitamin A Coverage classification
 legend(
   title = "Coverage Classification",
-  x = "topright", inset = 0.002,
+  x = "bottomright", inset = 0.002,
   legend = c("Low (0-30%)", "Moderate (30%-70%)", "High (70%-100%"),
   pch = 22, pt.cex = 2,
   col = RdYlGn, pt.bg = RdYlGn,
-  bty = "n", cex = 0.75
+  bty = "n", cex = 0.7
 )
