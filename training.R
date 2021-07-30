@@ -76,6 +76,9 @@ plot(westPokot_1032)
 sam_pt_coverage <- sleacData$sam.in / sleacData$sam.total
 sam_pt_coverage <- with(sleacData, sam.in / sam.total)
 
+mam_pt_coverage <- sleacData$mam.in / sleacData$mam.total
+mam_pt_coverage <- with(sleacData, mam.in /mam.total)
+
 ##
 ## Because this is a SLEAC survey, we need to classify point and period coverage
 ## based on set standards. For this exercise we used two standards classifier
@@ -96,7 +99,9 @@ sam_pt_class <- classify_coverage(n = sleacData$sam.total,
 sam_pd_class <- classify_coverage(n = sleacData$sam.total + sleacData$sam.rec,
                                   cases_in = sleacData$sam.in + sleacData$sam.rec)
 
+
 sam_pd_coverage <- with(sleacData, (sam.in + sam.rec) / (sam.total + sam.rec))
+mam_pd_coverage <- with(sleacData, (mam.in + mam.rec) / (mam.total + mam.rec))
 
 ## How do I add the calculated coverage values to the sleacData object?
 sleacData$sam_pt_coverage <- sam_pt_coverage
@@ -172,6 +177,8 @@ sam_pt_class <- cut(x = westPokot@data$sam_pt_coverage,
                     breaks = c(0, 0.2, 0.4, 0.6, 0.8, 1),
                     include.lowest = FALSE, right = TRUE, label = FALSE) + 1
 sam_pt_class <- ifelse(is.na(sam_pt_class), 1, sam_pt_class)
+
+
 
 ## Step 4: Plot the point coverage choropleth map
 ## This plot will produce wrong colours for the coverage values of each subcounty
